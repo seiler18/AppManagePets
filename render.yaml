@@ -1,0 +1,25 @@
+# Blueprint de Render. Con este archivo en la raiz del repo, Render crea el
+# servicio sin configurar nada a mano en el panel.
+#
+# Las variables marcadas con sync:false NO se guardan aqui: Render las pide en
+# el panel al crear el servicio. Es la unica forma de tener el repo publico sin
+# publicar la cadena de conexion de la base de datos.
+services:
+  - type: web
+    name: appmanagepets
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      - key: APP_ADMIN_PASSWORD
+        sync: false

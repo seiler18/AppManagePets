@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza('Mis mascotas')}"></head>
+<body>
+<header th:replace="~{fragmentos :: barra}"></header>
+
+<main class="contenedor">
+  <h1>Mis mascotas</h1>
+  <p class="tenue">
+    A nombre de <strong th:text="${dueno.nombreCompleto}">—</strong>
+    · RUT <span th:text="${dueno.rut}">—</span>
+  </p>
+
+  <div class="aviso ok" th:if="${mensaje}" th:text="${mensaje}"></div>
+
+  <div class="panel">
+    <h2>
+      <span th:text="|Registradas (${#lists.size(mascotas)})|">Registradas</span>
+      <a class="btn" th:href="@{/mascotas/nueva}">Registrar mascota</a>
+    </h2>
+
+    <div class="vacio" th:if="${#lists.isEmpty(mascotas)}">
+      Todavía no has registrado ninguna mascota.
+    </div>
+
+    <div class="tabla-scroll" th:unless="${#lists.isEmpty(mascotas)}">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th><th>Tipo</th><th>Raza</th>
+            <th>Edad</th><th>Sexo</th><th>Descripción</th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="m : ${mascotas}">
+            <td th:text="${m.nombre}">—</td>
+            <td>
+              <span class="etiqueta" th:classappend="${m.tipo == 'Gato'} ? 'gato' : ''"
+                    th:text="${m.tipo}">—</span>
+            </td>
+            <td th:text="${m.raza} ?: '—'">—</td>
+            <td th:text="${m.edad} + ' años'">—</td>
+            <td th:text="${m.sexo} ?: '—'">—</td>
+            <td class="tenue" th:text="${m.descripcion} ?: '—'">—</td>
+            <td class="acciones">
+              <a class="btn fantasma chico" th:href="@{/mascotas/{id}/editar(id=${m.id})}">Editar</a>
+              <form th:action="@{/mascotas/{id}/eliminar(id=${m.id})}" method="post"
+                    onsubmit="return confirm('¿Eliminar esta mascota?')">
+                <button class="btn peligro chico" type="submit">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

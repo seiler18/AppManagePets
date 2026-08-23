@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza('Mis datos')}"></head>
+<body>
+<header th:replace="~{fragmentos :: barra}"></header>
+
+<main class="contenedor">
+  <h1 th:text="${esNueva} ? 'Completa tus datos' : 'Mis datos'">Mis datos</h1>
+  <p class="tenue" th:if="${esNueva}">
+    Necesitamos tu ficha antes de registrar mascotas: cada mascota queda a nombre
+    de una persona.
+  </p>
+
+  <form class="panel" th:action="@{/perfil}" th:object="${dueno}" method="post">
+    <input type="hidden" th:field="*{id}">
+
+    <div class="rejilla">
+      <div class="campo">
+        <label for="rut">RUT</label>
+        <input type="text" id="rut" th:field="*{rut}" placeholder="12345678-9" required>
+        <span class="error" th:if="${#fields.hasErrors('rut')}" th:errors="*{rut}"></span>
+      </div>
+      <div class="campo">
+        <label for="edad">Edad</label>
+        <input type="number" id="edad" th:field="*{edad}" min="18" max="120" required>
+        <span class="error" th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}"></span>
+      </div>
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required>
+        <span class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+      </div>
+      <div class="campo">
+        <label for="apellido">Apellido</label>
+        <input type="text" id="apellido" th:field="*{apellido}" required>
+        <span class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></span>
+      </div>
+      <div class="campo">
+        <label for="telefono">Teléfono</label>
+        <input type="text" id="telefono" th:field="*{telefono}" placeholder="+56 9 1234 5678">
+      </div>
+      <div class="campo">
+        <label for="direccion">Dirección</label>
+        <input type="text" id="direccion" th:field="*{direccion}">
+      </div>
+      <div class="campo">
+        <label for="region">Región</label>
+        <input type="text" id="region" th:field="*{region}">
+      </div>
+      <div class="campo">
+        <label for="comuna">Comuna</label>
+        <input type="text" id="comuna" th:field="*{comuna}">
+      </div>
+    </div>
+
+    <button class="btn" type="submit">Guardar</button>
+    <a class="btn fantasma" th:href="@{/mascotas}" th:unless="${esNueva}">Cancelar</a>
+  </form>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

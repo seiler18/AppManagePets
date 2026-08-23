@@ -1,0 +1,166 @@
+/* ============================================================
+   AppManagePets — hoja de estilos unica.
+
+   La paleta es la misma del CV de Jesus Seiler (negro + azul + cyan) para
+   que la app se vea como una pieza del portafolio y no como algo ajeno.
+   No se usa Bootstrap: con 512MB de RAM y arranque en frio en el plan
+   gratuito, cada kilobyte que no se sirve es tiempo que no se espera.
+   ============================================================ */
+
+:root {
+  --bg:           #0a0e1a;
+  --surface:      #111827;
+  --surface-2:    #0f172a;
+  --blue:         #2563eb;
+  --blue-light:   #60a5fa;
+  --cyan:         #22d3ee;
+  --text:         #e5e7eb;
+  --text-muted:   #94a3b8;
+  --border:       rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(34, 211, 238, 0.45);
+  --danger:       #f87171;
+  --ok:           #34d399;
+  --gradient:     linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+  --radius:       16px;
+  --radius-sm:    10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Raleway", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(900px circle at 15% -10%, rgba(37, 99, 235, 0.10), transparent 45%),
+    radial-gradient(700px circle at 100% 0%, rgba(34, 211, 238, 0.08), transparent 40%);
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+h1, h2, h3 { color: #fff; line-height: 1.25; margin: 0 0 .5rem; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); }
+h2 { font-size: 1.35rem; }
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ----------------------- ARMAZON ----------------------- */
+.topbar {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  padding: .85rem 1.5rem;
+  background: rgba(13, 17, 23, .85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 10;
+}
+.topbar .marca {
+  font-weight: 800; letter-spacing: .5px; color: #fff;
+  display: flex; align-items: center; gap: .5rem;
+}
+.topbar .marca span {
+  background: var(--gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.topbar nav { display: flex; gap: .35rem; flex-wrap: wrap; margin-left: auto; align-items: center; }
+.topbar nav a, .topbar nav button {
+  color: var(--text-muted); padding: .45rem .8rem; border-radius: var(--radius-sm);
+  font-size: .92rem; border: 1px solid transparent; background: none;
+  font-family: inherit; cursor: pointer;
+}
+.topbar nav a:hover, .topbar nav button:hover {
+  color: #fff; background: var(--surface); border-color: var(--border-hover);
+  text-decoration: none;
+}
+.topbar .quien { color: var(--text-muted); font-size: .85rem; }
+.topbar .quien strong { color: var(--cyan); }
+
+.contenedor { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.estrecho { max-width: 460px; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.panel h2 { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+.tenue { color: var(--text-muted); }
+.pie { text-align: center; color: var(--text-muted); font-size: .82rem; padding: 2rem 1rem; }
+
+/* ----------------------- HERO ----------------------- */
+.hero { text-align: center; padding: 3rem 1rem 1rem; }
+.hero p { color: var(--text-muted); max-width: 620px; margin: 0 auto 1.5rem; }
+.hero .acciones { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+
+.cifras { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+.cifra {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem 1.75rem; min-width: 130px;
+}
+.cifra b { display: block; font-size: 1.9rem; color: var(--cyan); line-height: 1.1; }
+.cifra span { color: var(--text-muted); font-size: .82rem; }
+
+/* ----------------------- FORMULARIOS ----------------------- */
+.campo { margin-bottom: 1rem; }
+.campo label { display: block; font-size: .85rem; color: var(--text-muted); margin-bottom: .3rem; }
+.campo input, .campo select, .campo textarea {
+  width: 100%; padding: .65rem .8rem;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-family: inherit; font-size: .95rem;
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  outline: none; border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, .15);
+}
+.campo textarea { resize: vertical; min-height: 80px; }
+.campo .error { color: var(--danger); font-size: .8rem; display: block; margin-top: .25rem; }
+.rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0 1rem; }
+
+.btn {
+  display: inline-block; padding: .65rem 1.4rem; border: none; cursor: pointer;
+  border-radius: var(--radius-sm); font-family: inherit; font-size: .95rem;
+  font-weight: 600; background: var(--gradient); color: #061018;
+}
+.btn:hover { filter: brightness(1.1); text-decoration: none; }
+.btn.fantasma { background: none; border: 1px solid var(--border-hover); color: var(--cyan); }
+.btn.fantasma:hover { background: var(--surface-2); }
+.btn.peligro { background: none; border: 1px solid rgba(248, 113, 113, .5); color: var(--danger); }
+.btn.peligro:hover { background: rgba(248, 113, 113, .1); }
+.btn.chico { padding: .35rem .8rem; font-size: .82rem; }
+
+/* ----------------------- AVISOS ----------------------- */
+.aviso {
+  padding: .8rem 1rem; border-radius: var(--radius-sm);
+  margin-bottom: 1.25rem; font-size: .92rem;
+  border: 1px solid; display: flex; gap: .5rem; align-items: flex-start;
+}
+.aviso.ok    { border-color: rgba(52, 211, 153, .4); background: rgba(52, 211, 153, .08); color: var(--ok); }
+.aviso.malo  { border-color: rgba(248, 113, 113, .4); background: rgba(248, 113, 113, .08); color: var(--danger); }
+.aviso.nota  { border-color: var(--border); background: var(--surface-2); color: var(--text-muted); }
+
+/* ----------------------- TABLAS ----------------------- */
+.tabla-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { text-align: left; padding: .7rem .6rem; border-bottom: 1px solid var(--border); }
+th { color: var(--text-muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+tbody tr:hover { background: var(--surface-2); }
+td.acciones { display: flex; gap: .4rem; flex-wrap: wrap; }
+
+.etiqueta {
+  display: inline-block; padding: .15rem .6rem; border-radius: 999px;
+  font-size: .75rem; background: rgba(37, 99, 235, .15);
+  border: 1px solid rgba(96, 165, 250, .3); color: var(--blue-light);
+}
+.etiqueta.gato { background: rgba(34, 211, 238, .12); border-color: rgba(34, 211, 238, .3); color: var(--cyan); }
+
+.vacio { text-align: center; padding: 2.5rem 1rem; color: var(--text-muted); }
+
+@media (max-width: 560px) {
+  .topbar { padding: .7rem 1rem; }
+  .topbar nav { width: 100%; margin-left: 0; }
+  .panel { padding: 1.1rem; }
+}

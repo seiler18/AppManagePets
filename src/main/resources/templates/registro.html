@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza('Crear cuenta')}"></head>
+<body>
+<header th:replace="~{fragmentos :: barra}"></header>
+
+<main class="contenedor estrecho">
+  <h1>Crear cuenta</h1>
+  <p class="tenue">Después de entrar te pediremos tus datos personales.</p>
+
+  <div class="aviso malo" th:if="${error}" th:text="${error}"></div>
+
+  <form class="panel" th:action="@{/registro}" method="post">
+    <div class="campo">
+      <label for="username">Usuario (mínimo 4 caracteres)</label>
+      <input type="text" id="username" name="username" th:value="${username}"
+             required minlength="4" maxlength="60" autofocus autocomplete="username">
+    </div>
+    <div class="campo">
+      <label for="password">Contraseña (mínimo 6 caracteres)</label>
+      <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password">
+    </div>
+    <div class="campo">
+      <label for="password2">Repite la contraseña</label>
+      <input type="password" id="password2" name="password2" required minlength="6" autocomplete="new-password">
+    </div>
+    <button class="btn" type="submit">Crear cuenta</button>
+  </form>
+
+  <p class="tenue">¿Ya tienes cuenta? <a th:href="@{/login}">Entrar</a></p>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza('Acceso denegado')}"></head>
+<body>
+<header th:replace="~{fragmentos :: barra}"></header>
+
+<main class="contenedor estrecho">
+  <h1>No puedes ver eso</h1>
+  <div class="aviso malo">
+    Ese registro no es tuyo, o la sección requiere permisos de administración.
+  </div>
+  <a class="btn fantasma" th:href="@{/mascotas}">Volver a mis mascotas</a>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

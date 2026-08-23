@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--/*
+  Fragmentos compartidos. Se usa inclusion simple (th:replace) en vez del
+  layout-dialect para no anadir una dependencia mas por tres bloques.
+*/-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="cabeza(titulo)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="|${titulo} · AppManagePets|">AppManagePets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+
+<header class="topbar" th:fragment="barra">
+  <a class="marca" th:href="@{/}">🐾 App<span>ManagePets</span></a>
+  <nav>
+    <!--/* sec:authorize evita mostrar enlaces que el filtro de seguridad
+           rechazaria de todos modos */-->
+    <a th:href="@{/mascotas}" sec:authorize="isAuthenticated()">Mis mascotas</a>
+    <a th:href="@{/perfil}"   sec:authorize="isAuthenticated()">Mis datos</a>
+    <a th:href="@{/admin}"    sec:authorize="hasRole('ADMIN')">Panel admin</a>
+
+    <span class="quien" sec:authorize="isAuthenticated()">
+      <strong sec:authentication="name">usuario</strong>
+    </span>
+
+    <!--/* El logout va por POST porque CSRF esta activo: un <a> daria 403 */-->
+    <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" style="display:inline">
+      <button type="submit">Salir</button>
+    </form>
+
+    <a th:href="@{/login}"    sec:authorize="!isAuthenticated()">Entrar</a>
+    <a th:href="@{/registro}" sec:authorize="!isAuthenticated()">Crear cuenta</a>
+  </nav>
+</header>
+
+<footer class="pie" th:fragment="pie">
+  <p>
+    Registro de personas y mascotas · Spring Boot + Thymeleaf ·
+    <a href="https://seiler18.github.io/Curriculo/" target="_blank" rel="noopener">Jesús Seiler</a>
+  </p>
+</footer>
+
+</body>
+</html>

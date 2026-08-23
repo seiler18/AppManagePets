@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabeza('Panel de administración')}"></head>
+<body>
+<header th:replace="~{fragmentos :: barra}"></header>
+
+<main class="contenedor">
+  <h1>Panel de administración</h1>
+  <p class="tenue">Vista completa: todas las personas registradas y sus mascotas.</p>
+
+  <div class="cifras" style="justify-content:flex-start">
+    <div class="cifra"><b th:text="${totalDuenos}">0</b><span>personas</span></div>
+    <div class="cifra"><b th:text="${totalMascotas}">0</b><span>mascotas</span></div>
+  </div>
+
+  <div class="vacio panel" th:if="${#lists.isEmpty(duenos)}">
+    Todavía no hay personas registradas.
+  </div>
+
+  <div class="panel" th:each="d : ${duenos}">
+    <h2>
+      <span th:text="${d.nombreCompleto}">—</span>
+      <span class="etiqueta" th:text="|${#lists.size(d.mascotas)} mascota(s)|">0</span>
+    </h2>
+    <p class="tenue">
+      RUT <span th:text="${d.rut}">—</span> ·
+      <span th:text="${d.edad}">—</span> años ·
+      cuenta <strong th:text="${d.usuario.username}">—</strong>
+      <span th:if="${d.telefono}"> · tel. <span th:text="${d.telefono}"></span></span>
+      <br th:if="${d.direccion != null or d.comuna != null}">
+      <span th:if="${d.direccion}" th:text="${d.direccion}"></span>
+      <span th:if="${d.comuna}" th:text="|, ${d.comuna}|"></span>
+      <span th:if="${d.region}" th:text="|, ${d.region}|"></span>
+    </p>
+
+    <div class="vacio" th:if="${#lists.isEmpty(d.mascotas)}">Sin mascotas registradas.</div>
+
+    <div class="tabla-scroll" th:unless="${#lists.isEmpty(d.mascotas)}">
+      <table>
+        <thead>
+          <tr><th>Mascota</th><th>Tipo</th><th>Raza</th><th>Edad</th><th>Sexo</th><th>Descripción</th></tr>
+        </thead>
+        <tbody>
+          <tr th:each="m : ${d.mascotas}">
+            <td th:text="${m.nombre}">—</td>
+            <td>
+              <span class="etiqueta" th:classappend="${m.tipo == 'Gato'} ? 'gato' : ''"
+                    th:text="${m.tipo}">—</span>
+            </td>
+            <td th:text="${m.raza} ?: '—'">—</td>
+            <td th:text="${m.edad}">—</td>
+            <td th:text="${m.sexo} ?: '—'">—</td>
+            <td class="tenue" th:text="${m.descripcion} ?: '—'">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>

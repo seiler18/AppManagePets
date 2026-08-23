@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragmentos :: cabeza('Inicio')}"></head>
+<body>
+<header th:replace="~{fragmentos :: barra}"></header>
+
+<main class="contenedor">
+  <section class="hero">
+    <h1>Registra a tu mascota</h1>
+    <p>
+      Crea tu cuenta, completa tus datos y anota a tus mascotas. Cada persona ve
+      solamente sus propios registros; la cuenta de administración ve el catálogo
+      completo.
+    </p>
+    <div class="acciones">
+      <a class="btn" th:href="@{/registro}" sec:authorize="!isAuthenticated()">Crear cuenta</a>
+      <a class="btn fantasma" th:href="@{/login}" sec:authorize="!isAuthenticated()">Ya tengo cuenta</a>
+      <a class="btn" th:href="@{/mascotas}" sec:authorize="isAuthenticated()">Ir a mis mascotas</a>
+    </div>
+
+    <div class="cifras">
+      <div class="cifra">
+        <b th:text="${totalDuenos}">0</b>
+        <span>personas registradas</span>
+      </div>
+      <div class="cifra">
+        <b th:text="${totalMascotas}">0</b>
+        <span>mascotas registradas</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" sec:authorize="!isAuthenticated()">
+    <h2>Para probarla sin registrarte</h2>
+    <p class="tenue">
+      Usuario <code>demo</code> / contraseña <code>demo123</code> — ve solo sus dos
+      mascotas de ejemplo. La cuenta de administración existe pero su contraseña
+      no es pública.
+    </p>
+  </section>
+</main>
+
+<footer th:replace="~{fragmentos :: pie}"></footer>
+</body>
+</html>
