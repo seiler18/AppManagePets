@@ -21,3 +21,9 @@ Thumbs.db
 ### Nunca al repo: credenciales locales ###
 .env
 application-local.properties
+
+### Claude Code ###
+# settings.json SÍ se versiona: declara el marketplace y los plugins del
+# proyecto, así la configuración viaja con el repositorio.
+# settings.local.json son permisos de la máquina local, no del proyecto.
+.claude/settings.local.json
