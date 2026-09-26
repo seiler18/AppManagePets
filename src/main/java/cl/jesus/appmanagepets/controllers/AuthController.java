@@ -1,5 +1,7 @@
 package cl.jesus.appmanagepets.controllers;
 
+import java.nio.charset.StandardCharsets;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +40,19 @@ public class AuthController {
         if (username.isBlank() || username.length() < 4) {
             return volverConError(model, username, "El usuario debe tener al menos 4 caracteres");
         }
+        // 60 es el length de la columna: por encima, el INSERT falla con un 500.
+        if (username.length() > 60) {
+            return volverConError(model, "", "El usuario no puede tener mas de 60 caracteres");
+        }
         if (password.length() < 6) {
             return volverConError(model, username, "La contrasena debe tener al menos 6 caracteres");
+        }
+        // BCrypt solo mira los primeros 72 bytes: dos claves que compartan ese
+        // prefijo serian la misma (CVE-2025-22228), y Spring Security reciente
+        // lanza excepcion al codificarlas. Se cuenta en bytes, no en caracteres,
+        // porque una tilde o una n con virgulilla ocupan dos.
+        if (password.getBytes(StandardCharsets.UTF_8).length > 72) {
+            return volverConError(model, username, "La contrasena es demasiado larga (maximo 72 caracteres)");
         }
         if (!password.equals(password2)) {
             return volverConError(model, username, "Las contrasenas no coinciden");

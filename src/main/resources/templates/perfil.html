@@ -27,29 +27,33 @@
       </div>
       <div class="campo">
         <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required>
+        <input type="text" id="nombre" th:field="*{nombre}" required maxlength="60">
         <span class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
       </div>
       <div class="campo">
         <label for="apellido">Apellido</label>
-        <input type="text" id="apellido" th:field="*{apellido}" required>
+        <input type="text" id="apellido" th:field="*{apellido}" required maxlength="60">
         <span class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></span>
       </div>
       <div class="campo">
         <label for="telefono">Teléfono</label>
-        <input type="text" id="telefono" th:field="*{telefono}" placeholder="+56 9 1234 5678">
+        <input type="text" id="telefono" th:field="*{telefono}" placeholder="+56 9 1234 5678" maxlength="20">
+        <span class="error" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></span>
       </div>
       <div class="campo">
         <label for="direccion">Dirección</label>
-        <input type="text" id="direccion" th:field="*{direccion}">
+        <input type="text" id="direccion" th:field="*{direccion}" maxlength="200">
+        <span class="error" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></span>
       </div>
       <div class="campo">
         <label for="region">Región</label>
-        <input type="text" id="region" th:field="*{region}">
+        <input type="text" id="region" th:field="*{region}" maxlength="60">
+        <span class="error" th:if="${#fields.hasErrors('region')}" th:errors="*{region}"></span>
       </div>
       <div class="campo">
         <label for="comuna">Comuna</label>
-        <input type="text" id="comuna" th:field="*{comuna}">
+        <input type="text" id="comuna" th:field="*{comuna}" maxlength="60">
+        <span class="error" th:if="${#fields.hasErrors('comuna')}" th:errors="*{comuna}"></span>
       </div>
     </div>
 

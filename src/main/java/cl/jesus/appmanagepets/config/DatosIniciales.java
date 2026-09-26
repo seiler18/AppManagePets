@@ -36,10 +36,15 @@ public class DatosIniciales implements ApplicationRunner {
     private final PasswordEncoder passwordEncoder;
 
     /**
-     * En produccion se pasa por variable de entorno APP_ADMIN_PASSWORD.
-     * El valor por defecto solo sirve para desarrollo local.
+     * En produccion se pasa por variable de entorno APP_ADMIN_PASSWORD; en
+     * local la da application.properties. Sin valor por defecto aqui a
+     * proposito: un ":admin123" en el codigo seria un respaldo silencioso que
+     * dejaria arrancar con la clave conocida si faltara la propiedad.
+     *
+     * Ojo: solo se usa al CREAR la cuenta. Cambiar la variable despues no
+     * cambia la clave de un admin que ya existe en la base.
      */
-    @Value("${app.admin.password:admin123}")
+    @Value("${app.admin.password}")
     private String adminPassword;
 
     @Value("${app.datos-demo:true}")

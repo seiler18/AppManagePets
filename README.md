@@ -14,7 +14,7 @@ sola aplicación, ahora con autenticación, validación y control de propiedad.
 
 | Pieza | Qué se usa |
 |---|---|
-| Backend | Spring Boot 3.3.5, Java 17 |
+| Backend | Spring Boot 3.5.16, Java 17 |
 | Vistas | Thymeleaf + CSS propio (sin framework de front) |
 | Seguridad | Spring Security 6, BCrypt, CSRF activo, roles `USER` / `ADMIN` |
 | Persistencia | Spring Data JPA · H2 en memoria (local) · PostgreSQL (producción) |

@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,11 +33,15 @@ public class Dueno {
     @Column(nullable = false, unique = true, length = 12)
     private String rut;
 
+    // Cada @Size replica el length de su @Column: sin el, un texto mas largo
+    // pasa la validacion y revienta en el INSERT de Postgres con un 500.
     @NotBlank(message = "El nombre es obligatorio")
+    @Size(max = 60, message = "Maximo 60 caracteres")
     @Column(nullable = false, length = 60)
     private String nombre;
 
     @NotBlank(message = "El apellido es obligatorio")
+    @Size(max = 60, message = "Maximo 60 caracteres")
     @Column(nullable = false, length = 60)
     private String apellido;
 
@@ -46,15 +51,19 @@ public class Dueno {
     @Column(nullable = false)
     private Integer edad;
 
+    @Size(max = 20, message = "Maximo 20 caracteres")
     @Column(length = 20)
     private String telefono;
 
+    @Size(max = 200, message = "Maximo 200 caracteres")
     @Column(length = 200)
     private String direccion;
 
+    @Size(max = 60, message = "Maximo 60 caracteres")
     @Column(length = 60)
     private String region;
 
+    @Size(max = 60, message = "Maximo 60 caracteres")
     @Column(length = 60)
     private String comuna;
 

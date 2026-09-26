@@ -13,7 +13,7 @@
     <div class="rejilla">
       <div class="campo">
         <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required autofocus>
+        <input type="text" id="nombre" th:field="*{nombre}" required autofocus maxlength="60">
         <span class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
       </div>
       <div class="campo">
@@ -32,7 +32,8 @@
       </div>
       <div class="campo">
         <label for="raza">Raza</label>
-        <input type="text" id="raza" th:field="*{raza}">
+        <input type="text" id="raza" th:field="*{raza}" maxlength="60">
+        <span class="error" th:if="${#fields.hasErrors('raza')}" th:errors="*{raza}"></span>
       </div>
       <div class="campo">
         <label for="edad">Edad (años)</label>
@@ -53,6 +54,7 @@
       <label for="descripcion">Descripción</label>
       <textarea id="descripcion" th:field="*{descripcion}" maxlength="300"
                 placeholder="Carácter, cuidados, señas particulares…"></textarea>
+      <span class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></span>
     </div>
 
     <button class="btn" type="submit">Guardar</button>

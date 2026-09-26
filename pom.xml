@@ -6,7 +6,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.5</version>
+        <!-- 3.5.x y no 3.3.x: la rama 3.3 ya no recibe parches libres y la
+             3.3.5 arrastraba CVE publicados en Tomcat (DoS por multipart) y en
+             Spring Security (BCrypt aceptaba contrasenas de mas de 72 bytes).
+             El salto a 4.x es una migracion, no un parche: no se hace aqui. -->
+        <version>3.5.16</version>
         <relativePath/>
     </parent>
 
