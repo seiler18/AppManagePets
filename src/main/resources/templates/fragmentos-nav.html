@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--/*
+  Cinta de navegacion inferior (solo se ve en el celular, <= 720px; el CSS
+  esta al final de app.css). Los items salen de la barra superior y respetan
+  la sesion y el rol con sec:authorize. El item activo lo marca nav-inferior.js
+  con location.pathname (el #httpServletRequest ya no existe en Thymeleaf 3.1).
+*/-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<nav class="nav-inferior" aria-label="Secciones" th:fragment="cinta">
+  <a class="nav-item" th:href="@{/}">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+    <span>Inicio</span>
+  </a>
+  <a class="nav-item" th:href="@{/mascotas}" sec:authorize="isAuthenticated()">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="10" r="2"/><circle cx="10" cy="5.5" r="2"/><circle cx="14.5" cy="5.5" r="2"/><circle cx="18.5" cy="10" r="2"/><path d="M12 11c-3 0-5.5 3-5.5 5.5 0 1.7 1.3 2.5 2.8 2.5 1 0 1.8-.5 2.7-.5s1.7.5 2.7.5c1.5 0 2.8-.8 2.8-2.5C17.5 14 15 11 12 11z"/></svg>
+    <span>Mascotas</span>
+  </a>
+  <a class="nav-item" th:href="@{/mascotas/nueva}" sec:authorize="isAuthenticated()">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+    <span>Nueva</span>
+  </a>
+  <a class="nav-item" th:href="@{/perfil}" sec:authorize="isAuthenticated()">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+    <span>Mis datos</span>
+  </a>
+  <a class="nav-item" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.3 8-8 9-4.7-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+    <span>Admin</span>
+  </a>
+  <a class="nav-item" th:href="@{/login}" sec:authorize="!isAuthenticated()">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h4v16h-4"/><path d="M10 8l4 4-4 4M14 12H4"/></svg>
+    <span>Entrar</span>
+  </a>
+  <a class="nav-item" th:href="@{/registro}" sec:authorize="!isAuthenticated()">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="4"/><path d="M2 21c0-4 3.6-7 8-7M18 14v6M15 17h6"/></svg>
+    <span>Crear cuenta</span>
+  </a>
+  <script th:src="@{/js/nav-inferior.js}" defer></script>
+</nav>
+</body>
+</html>
