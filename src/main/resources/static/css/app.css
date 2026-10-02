@@ -75,7 +75,7 @@ a:hover { text-decoration: underline; }
 .topbar .quien { color: var(--text-muted); font-size: .85rem; }
 .topbar .quien strong { color: var(--cyan); }
 
-.contenedor { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.contenedor { max-width: 1500px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 .estrecho { max-width: 460px; }
 
 .panel {
