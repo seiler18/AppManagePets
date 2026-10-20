@@ -32,4 +32,12 @@ updates:
       timezone: America/Santiago
     commit-message:
       prefix: "deps"
+    ignore:
+      # La versión de Java la fija `java.version` del pom (17): subir el JDK o el
+      # JRE de la imagen sin subirla allí desalinea compilación y ejecución. Se
+      # cambia a mano, junto con el pom.
+      - dependency-name: eclipse-temurin
+        update-types: ["version-update:semver-major"]
+      - dependency-name: maven
+        update-types: ["version-update:semver-major"]
 
