@@ -2,7 +2,7 @@
 # Etiquetas con la distro fijada (-noble): si la base cambiara de Ubuntu a otra
 # cosa por debajo, el build seguiria "funcionando" con otra imagen. No se fija
 # por digest a proposito: eso congelaria tambien los parches de seguridad.
-FROM maven:3.9-eclipse-temurin-17-noble AS build
+FROM maven:3.9-eclipse-temurin-26-noble AS build
 WORKDIR /app
 
 # Las dependencias se resuelven antes de copiar el codigo: mientras el pom no
