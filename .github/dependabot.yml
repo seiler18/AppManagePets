@@ -20,6 +20,14 @@ updates:
     groups:
       menores-y-parches:
         update-types: [minor, patch]
+    ignore:
+      # Spring Boot 4 no es una subida de versión sino una migración: movió los
+      # módulos de test (`AutoConfigureMockMvc` ya no está donde estaba y
+      # `SeguridadWebTest` no compila, comprobado el 2026-10-20 con el PR de
+      # Dependabot). Se hace a propósito, con AppManageEvents como referencia.
+      # Los parches y menores de 3.5.x siguen llegando.
+      - dependency-name: "org.springframework.boot:*"
+        update-types: ["version-update:semver-major"]
 
   # Las imágenes base del Dockerfile (JDK y JRE) son lo que realmente corre en
   # producción: un parche de seguridad del JRE llega por aquí, no por el pom.
